@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
+from django.views import generic
 
 from task_manager.models import TaskType, Position, Worker, Task
 
@@ -23,3 +25,27 @@ def index(request) -> render:
     }
 
     return render(request, "task_manager/index.html", context=context)
+
+
+class PositionListView(LoginRequiredMixin, generic.ListView):
+    model = Position
+    paginate_by = 5
+    queryset = Position.objects.all()
+
+
+class TaskTypeListView(LoginRequiredMixin, generic.ListView):
+    model = TaskType
+    paginate_by = 5
+    queryset = TaskType.objects.all()
+
+
+class WorkerListView(LoginRequiredMixin, generic.ListView):
+    model = Worker
+    queryset = Worker.objects.all()
+    paginate_by = 5
+
+
+class TaskListView(LoginRequiredMixin, generic.ListView):
+    model = Task
+    paginate_by = 5
+    queryset = Task.objects.all().select_related("task_type")
