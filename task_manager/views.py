@@ -33,6 +33,10 @@ class PositionListView(LoginRequiredMixin, generic.ListView):
     queryset = Position.objects.all()
 
 
+class PositionDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Position
+
+
 class TaskTypeListView(LoginRequiredMixin, generic.ListView):
     model = TaskType
     paginate_by = 5
@@ -48,4 +52,4 @@ class WorkerListView(LoginRequiredMixin, generic.ListView):
 class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     paginate_by = 5
-    queryset = Task.objects.all().select_related("task_type")
+    queryset = Task.objects.select_related("task_type")
