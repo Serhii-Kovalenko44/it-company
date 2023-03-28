@@ -6,21 +6,19 @@
     <div class="row">
       <div class="col-lg-10 mx-auto">
         <div class="mb-4 w-25">
-          <h3>Position List</h3>
+          <h3>Task List</h3>
         </div>
         <div class="container py-2">
           <div class="row">
-            {% if task_list %}
-              {% for task in task_list %}
-                <a href="#">
-                  <div class="alert alert-light text-dark font-weight-bold" role="alert">
-                    {{ task }}
-                  </div>
-                </a>
-              {% endfor %}
-            {% else %}
+            {% for task in task_list %}
+              <a href="#">
+                <div class="alert alert-light text-dark font-weight-bold" role="alert">
+                  {{ task }}
+                </div>
+              </a>
+            {% empty %}
               <p>There are no task in the company.</p>
-            {% endif %}
+            {% endfor %}
           </div>
         </div>
       </div>
