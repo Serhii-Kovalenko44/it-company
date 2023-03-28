@@ -12,11 +12,9 @@
           <div class="row">
             {% if tasktype_list %}
               {% for task_type in tasktype_list %}
-                <a href="#">
-                  <div class="alert alert-light text-dark font-weight-bold" role="alert">
-                    {{ task_type}}
-                  </div>
-                </a>
+                <div class="alert alert-light text-dark font-weight-bold" role="alert">
+                  {{ task_type}}
+                </div>
               {% endfor %}
             {% else %}
               <p>There are no task type in the company.</p>
