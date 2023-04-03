@@ -11,25 +11,22 @@
           <h3 class="text-white">Worker List</h3>
         </div>
         <div class="col-lg-7 text-center mx-auto">
-          <a href="#" class="btn bg-gradient-primary btn-sm" role="button">New worker</a>
+          <a href="{% url 'task_manager:worker-create' %}" class="btn bg-gradient-primary btn-sm" role="button">New worker</a>
         </div>
         <div class="container py-2">
-          <div class="row">
-            {% if worker_list %}
-              {% for worker in worker_list %}
-                <a href="#">
-                  <div class="card col-lg-12 mx-auto">
-                   <div class="card-body">
-                      <h5 class="card-title">{{ worker }}</h5>
-                      <h6 class="card-text">Position: {{ worker.position }}</h6>
-                    </div>
-                  </div>
-                </a>
-              {% endfor %}
-            {% else %}
-              <p>There are no worker in the company.</p>
-            {% endif %}
-          </div>
+          {% for worker in worker_list %}
+            <a href="{% url 'task_manager:worker-detail' pk=worker.id %}">
+              <div class="card col-lg-12 mx-auto">
+               <div class="card-body">
+                  <h5 class="card-title">{{ worker }}</h5>
+                  <h6 class="card-text">Position: {{ worker.position }}</h6>
+                </div>
+              </div>
+            </a>
+            <br>
+          {% empty %}
+            <p>There are no worker in the company.</p>
+          {% endfor %}
         </div>
       </div>
     </div>
