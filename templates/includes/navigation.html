@@ -7,28 +7,28 @@
         <div class="container-fluid px-0">
           <a class="navbar-brand font-weight-bolder ms-sm-3"
             href="{% url 'task_manager:index' %}" rel="tooltip"
-            title="Designed and Coded by Creative Tim" data-placement="bottom">
+            title="Home" data-placement="bottom">
             Task Manager
           </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
           <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
             <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100">
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link" href="{% url 'task_manager:task-type-list' %}">Task type</a>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link" href="{% url 'task_manager:position-list' %}">Position</a>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link" href="{% url 'task_manager:task-list' %}">Task</a>
               </li>
 
-              <li class="nav-item">
+              <li class="nav-item mx-2">
                 <a class="nav-link" href="{% url 'task_manager:worker-list' %}">Worker</a>
+              </li>
+              <li class="nav-item ms-lg-auto mb-n3">
+                {% include 'includes/search.html' %}
               </li>
 
               {% if request.user.is_authenticated %}
