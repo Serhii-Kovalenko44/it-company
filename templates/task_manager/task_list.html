@@ -17,11 +17,10 @@
         </div>
         <div class="container py-2">
           {% for task in task_list %}
-
            <div class="card col-lg-12 mx-auto">
              <a href="{% url 'task_manager:task-detail' pk=task.id  %}">
                <div class="card-body">
-                <h5 class="card-title">{{ task }}</h5>
+                <h5 class="card-title">{{ task }}({{ task.task_type }})</h5>
                 <h6 class="card-subtitle mb-2 text-primary">Deadline: {{ task.deadline }}</h6>
                 <p class="card-text">{{ task.description }}</p>
               </div>
