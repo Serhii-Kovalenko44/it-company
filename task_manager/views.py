@@ -141,3 +141,18 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
     success_url = reverse_lazy("task_manager:task-list")
+
+
+@login_required
+def toggle_assign_to_task(
+    request: HttpRequest,
+    pk: int
+) -> HttpResponseRedirect:
+    worker = Worker.objects.get(id=request.user.id)
+    if (
+        Task.objects.get(id=pk) in worker.task.all()
+    ):  # probably could check if car exists
+        worker.task.remove(pk)
+    else:
+        worker.task.add(pk)
+    return HttpResponseRedirect(reverse_lazy("task_manager:task-detail", args=[pk]))
