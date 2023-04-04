@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block body %} class="bg-gray-900" {% endblock body %}
+
+{% block content %}
+  <div class="container-md mt-7">
+    <div class="row">
+      <div class="col-lg-10 mx-auto">
+        <div class="mb-4 w-100 text-center">
+          <h3 class="text-white">
+            Username: {{ worker.username }}
+            <a href="{% url 'task_manager:worker-update' pk=worker.id %}">
+              <img src="/static/img/edit.png" alt="" class="w-3">
+            </a>
+            <a href="{% url 'task_manager:worker-delete' pk=worker.id %}">
+              <img src="/static/img/5976474.png" alt="" class="w-3">
+            </a>
+          </h3>
+        </div>
+        <div class="container py-2">
+          <div class="row">
+            <div class="card col-lg-12 mx-auto">
+              <div class="card-body">
+                <h5 class="card-title">
+                  First name: {{ worker.first_name }}
+                  <br>
+                  Last name: {{ worker.last_name }}
+                </h5>
+                <p class="card-text">
+                  Position: {{ worker.position }}
+                  <br>
+                  ID: {{worker.id}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container py-2">
+          <div class="mb-4 w-100 ">
+            <h5 class="text-white">Performs the task</h5>
+          </div>
+          <div class="row">
+            <div class="card col-lg-12 mx-auto">
+              <div class="card-body">
+                {% for task in worker.task.all %}
+                  <h5 class="card-title">{{ task }}</h5>
+                  <p class="card-text">Description: {{ task.description }}</p>
+                {% empty %}
+                  <p>Not workers</p>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
