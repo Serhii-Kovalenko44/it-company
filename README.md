@@ -18,11 +18,16 @@
     source venv/bin/activate (on macOS)
     pip install -r requirements.txt
     ```
-6. Use the following command to load prepared data from fixture to test and debug your code:
+6. Copy the template file and rename it to .env. Generate secret key and add to .env.
+   ```
+   cp env.sample .env
+   python -c 'import secrets; print(secrets.token_hex())'
+   ```
+7. Use the following command to load prepared data from fixture to test and debug your code:
    ```
    python manage.py loaddata it_company_task_manager_db_data.json
    ```
-7. After loading data from fixture you can use following superuser (or create another one by yourself):
+8. After loading data from fixture you can use following superuser (or create another one by yourself):
    ```
    Login: admin.user
    Password: 1qazcde3
