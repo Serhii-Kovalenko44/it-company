@@ -46,7 +46,7 @@ class Task(models.Model):
     is_completed = models.BooleanField(default=False)
     priority = models.IntegerField(choices=PRIORITY, default=0)
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="task")
+    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="tasks")
 
     def __str__(self) -> str:
         return self.name

@@ -12,7 +12,7 @@ from task_manager.views import (
     WorkerDeleteView,
     TaskListView,
     TaskDetailView,
-    toggle_assign_to_task,
+    ToggleAssignToTaskView,
     TaskCreateView,
     TaskUpdateView,
     TaskDeleteView,
@@ -33,7 +33,7 @@ urlpatterns = [
     path("task/<int:pk>/", TaskDetailView.as_view(), name="task-detail"),
     path(
         "task/<int:pk>/toggle-assign/",
-        toggle_assign_to_task,
+        ToggleAssignToTaskView.as_view(),
         name="toggle-task-assign",
     ),
     path("task/<int:pk>/update/", TaskUpdateView.as_view(), name="task-update"),
