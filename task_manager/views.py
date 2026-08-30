@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import QuerySet
 from django.http import HttpResponseRedirect, HttpRequest
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -143,16 +143,14 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("task_manager:task-list")
 
 
-@login_required
-def toggle_assign_to_task(
-    request: HttpRequest,
-    pk: int
-) -> HttpResponseRedirect:
-    worker = Worker.objects.get(id=request.user.id)
-    if (
-        Task.objects.get(id=pk) in worker.task.all()
-    ):  # probably could check if car exists
-        worker.task.remove(pk)
-    else:
-        worker.task.add(pk)
-    return HttpResponseRedirect(reverse_lazy("task_manager:task-detail", args=[pk]))
+class ToggleAssignToTaskView(LoginRequiredMixin, generic.View):
+    def get(self, request: HttpRequest, pk, *args, **kwargs) -> HttpResponseRedirect:
+        task = get_object_or_404(Task, id=pk)
+        worker = request.user
+
+        if task in worker.tasks.all():
+            worker.tasks.remove(task)
+        else:
+            worker.tasks.add(task)
+
+        return redirect("task_manager:task-detail", pk=pk)
