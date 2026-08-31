@@ -40,14 +40,20 @@
           <div class="mb-4 w-100 ">
             <h5 class="text-white">
               Performs the task
-              {% if task in user.task.all %}
-                <a href="{% url 'task_manager:toggle-task-assign' pk=task.id %}" class="btn bg-gradient-danger link-to-page">
-                  Delete me from this task
-                </a>
+              {% if task in user.tasks.all %}
+                <form action="{% url 'task_manager:toggle-task-assign' pk=task.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn bg-gradient-danger link-to-page">
+                    Delete me from this task
+                  </button>
+                </form>
               {% else %}
-                <a href="{% url 'task_manager:toggle-task-assign' pk=task.id %}" class="btn bg-gradient-primary link-to-page">
-                  Assign me from this task
-                </a>
+                <form action="{% url 'task_manager:toggle-task-assign' pk=task.id %}" method="post">
+                  {% csrf_token %}
+                  <button type="submit" class="btn bg-gradient-primary link-to-page">
+                    Assign me to this task
+                  </button>
+                </form>
               {% endif %}
             </h5>
           </div>
