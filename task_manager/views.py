@@ -144,11 +144,11 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
 
 
 class ToggleAssignToTaskView(LoginRequiredMixin, generic.View):
-    def get(self, request: HttpRequest, pk, *args, **kwargs) -> HttpResponseRedirect:
+    def post(self, request: HttpRequest, pk, *args, **kwargs) -> HttpResponseRedirect:
         task = get_object_or_404(Task, id=pk)
         worker = request.user
 
-        if task in worker.tasks.all():
+        if worker.tasks.filter(id=task.id).exists():
             worker.tasks.remove(task)
         else:
             worker.tasks.add(task)
